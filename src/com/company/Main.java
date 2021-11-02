@@ -37,6 +37,11 @@ public class Main {
 
         return result.substring(0, result.length() - 1);
     }
+    public static String generateCar() {
+        Random rdm = new Random();
+
+        return new Auto(rdm.nextInt(4), rdm.nextInt(5), rdm.nextInt(4), rdm.nextInt(5), new ArrayList<>()).toString();
+    }
 
     public static void writeFileCar(String s) {
         try {
@@ -44,21 +49,35 @@ public class Main {
 
             myWriter.write(s + "\n");
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            // System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            // System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
         verifFileCar();
-        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < 5; i++) {
+            long startTime = System.currentTimeMillis();
 
-        writeFileCar(generateCar(10));
+            writeFileCar(generateCar(10000));
 
-        long stopTime = System.currentTimeMillis();
-        System.out.println(stopTime - startTime);
+            long stopTime = System.currentTimeMillis();
+
+            System.out.println(stopTime - startTime);
+        }
+
+        for (int i = 0; i < 5; i++) {
+            long startTime = System.currentTimeMillis();
+            for (int j = 0; j < 10000; j++) {
+                writeFileCar(generateCar());
+            }
+            long stopTime = System.currentTimeMillis();
+
+            System.out.println(stopTime - startTime);
+        }
+
         /* String[] type = {"sport", "familiale", "classique", "4*4"};
         String[] couleur = {"bleu", "rouge", "vert", "noir", "jaune"};
         int nbr;
